@@ -36,7 +36,7 @@ or move from HFS to APFS (SSDs only) based on the drive storage media.
 - Use `--force-hfs` to force an HFS image restore on an HFS-formatted SSD, rather than default to using an APFS image.
 
 - Use `--no-imagescan` with `--dry-run` to skip the asr imagescan process
-	- Unless you use [AutoDMG](https://github.com/MagerValp/AutoDMG) to build images from the command-line and use [`--skip-asr-imagescan`](https://github.com/MagerValp/AutoDMG/issues/144), you can safely always use `--no-imagescan` with all your dry runs.
+	- Unless you use [AutoDMG](https://github.com/MagerValp/AutoDMG) to build images from the command-line and use [`--skip-asr-imagescan`](https://github.com/MagerValp/AutoDMG/issues/144), you can safely use `--no-imagescan` with all your dry runs.
 
 - Use `--keep-jamflog` to copy the jamf.log off a JAMF-managed machine prior to OS restore and copy it back afterward. Similar to what you may have been used to with Jamf Imaging.
 

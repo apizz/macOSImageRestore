@@ -32,7 +32,7 @@ USER=$(/bin/ls -l /dev/console | /usr/bin/awk '{print $3}')
 NAME="macOSImageRestore"
 PROGRAM="${NAME}.sh"
 AUTHOR="AP Orlebeke"
-VERSION="1.0"
+VERSION="0.1.0"
 GITHUB="https://github.com/apizz/macOSImageRestore"
 LAST_UPDATE_DATE="4/24/18"
 
