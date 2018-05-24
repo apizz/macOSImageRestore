@@ -9,7 +9,7 @@ HFS_OS_IMAGE="osx_updated_180402-10.13.4-17E199.hfs.dmg"
 # Format: YYMMDD
 LOGDATE=$(/bin/date "+%y%m%d")
 # Log folder
-LOGPATH="/Users/${USER}/Desktop/OS_RESTORE_LOGS"
+LOGPATH="/Users/${USER}/Desktop/MACOS_IMAGERESTORE_LOGS"
 
 # Compname variables
 # Computer hostname required (true)
@@ -61,7 +61,8 @@ EXITCODE_ARRAY=("" # Dummy first line to align array index to corresponding erro
 "15: --log-path: No log path defined"
 "16: Specified --log-path directory does not exist"
 "17: Unknown argument passed to script"
-"18: Unmount of external disk failed")
+"18: Unmount of external disk failed"
+"19: macOS version is not High Sierra or later")
 
 EXITCODE_HELP_ARRAY=("" # Dummy first line
 "Please use --compname / -c instead" #1
@@ -81,7 +82,8 @@ EXITCODE_HELP_ARRAY=("" # Dummy first line
 "Please specify a path to an existing directory" #15
 "Please specify a path to an existing directory" #16
 "Please remove the unknown argument" #17
-"None .... sorry  ¯\_(ツ)_/¯") #18
+"None .... sorry  ¯\_(ツ)_/¯" #18
+"Please upgrade your macOS version to 10.13.4 or later") #19
 
 ##### FUNCTIONS
 
@@ -424,6 +426,14 @@ function verify_root() {
 	fi
 }
 
+function verify_os () {
+	OS_VERS=$(/usr/bin/sw_vers -productVersion | /usr/bin/awk -F. '{print $2}')
+	if [ "$OS_VERS" -lt "13" ]; then
+		errorcode=19
+		print_exitcode
+	fi
+}
+
 function verify_os_images() {
 	if [ "$FORCE_HFS" = 1 ]; then
 		if [ ! -f "${OS_IMAGE_PATH}/${HFS_OS_IMAGE}" ]; then
@@ -504,6 +514,9 @@ function write_compname_txt() {
 }
 
 ######## CHECKS & SCRIPT ########
+
+# Check that local machine is running High Sierra or later
+verify_os
 
 # Make LOGPATH if it doesn't exist
 make_log
